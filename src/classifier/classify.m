@@ -1,12 +1,12 @@
 % trivial classifier: compute ratio of L2 distance betweeen
 % nearest positive (class) feature vector and nearest negative (non-class)
 % feature vector
-function c = classify(VOCopts, classifier, testFeatures)
+function c = classify(VOCopts, classifier, testDescriptors)
 
-testFeatures = prdataset(testFeatures);
+testDescriptors = prdataset(testDescriptors);
 
 % Classify
-c = testFeatures*classifier;
+c = testDescriptors*classifier;
 
 % Get class probabilities
 c = getdata(c);

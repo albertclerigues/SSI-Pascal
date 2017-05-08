@@ -8,8 +8,10 @@ if nargin == 3
 
     % Compute words from image
     words = SSI_w_extractWords(VOCopts, I);
+    
     % Bag words according to dictionary
     A = SSI_dic_bagWords(VOCopts, dictionary, words);
+    
     %Get features
     descriptors = SSI_fd_computeFeatures(VOCopts, dictionary, A);
     return
@@ -27,8 +29,6 @@ if nargin == 4
         descriptors_i = SSI_fd_computeFeatures(VOCopts, dictionary, Ai);
         descriptors = [descriptors; descriptors_i];
     end
-    
-    disp('Histograms of Bagged Words built!');
 end
 
 end

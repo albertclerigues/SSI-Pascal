@@ -1,16 +1,15 @@
-function [ classifier ] = SSI_cl_train( VOCopts, cls, trainFeatures, cltype )
-
-if nargin < 4
-    cltype = 'svc';
-end
+function [ classifier ] = SSI_cl_train( VOCopts, cls, trainDescriptors)
 
 [~,gt]=textread(sprintf(VOCopts.clsimgsetpath,cls,'train'),'%s %d');
 
-Atrain = prdataset(trainFeatures,gt);
+Atrain = prdataset(trainDescriptors,gt);
 
-switch cltype
+switch VOCopts.cltype
     case {'svc', 'svm'}
         classifier = classc(svc(Atrain));
+    case 'nbayesc'
+        [U,G] = meancov(Atrain);
+        classifier = classc(nbayesc(U, G));
     otherwise
         classifier = classc(knnc(Atrain, 1));
 end

@@ -5,23 +5,20 @@ for i=1:VOCopts.nclasses
     cls=VOCopts.classes{i};
 
     % Compute Vocabulary from TRAIN
-    disp('Computing vocabulary...');
+    disp('Computing Vocabulary...');
     [ vocabulary, imgMetaData ] = SSI_w_computeVocabulary(VOCopts, cls);
     
     % Make dictionary
-    disp('Making dictionary...');
+    disp('Making Dictionary...');
     [ dictionary, A ] = SSI_dic_makeDictionary( VOCopts, cls, vocabulary );
     
     % Compute TRAIN descriptors
-    disp('Computing training descriptors...');
     [ descriptors ] = SSI_fd_computeDescriptors( VOCopts, dictionary, A, imgMetaData);
     
     % Train classifier with TRAIN
-    disp('Training classifier');
     classifier = SSI_cl_train(VOCopts, cls, descriptors); % train classifier
     
     % Test classifier and write results
-    disp('Testing classifier');
     SSI_cl_test(VOCopts,cls, classifier, dictionary);          % test classifier
     
     %Read results and otuput

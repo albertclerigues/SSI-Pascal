@@ -1,13 +1,14 @@
-function [ tree, A ] = SSI_dic_ikmeans( VOCopts, cls, vocabulary )
+function [ dictionary, A ] = SSI_dic_ikmeans( VOCopts, cls, vocabulary )
 
 % Cluster vocabulary into BOWs
 try
     % try to load dictionary and words
-    load(sprintf(VOCopts.hikmeanspath, cls), 'tree', 'A');
+    load(sprintf(VOCopts.dictpath, cls), 'dictionary', 'A');
 catch
-    opts = VOCopts.hikmeans;
-    [tree, A] = vl_hikmeans(vocabulary, opts.K, opts.nleaves);
-    save(sprintf(VOCopts.hikmeanspath, cls), 'tree', 'A');
+    opts = VOCopts.ikmeans;
+    [dictionary, A] = vl_ikmeans(vocabulary, opts.K);
+
+    save(sprintf(VOCopts.dictpath, cls), 'dictionary', 'A');
 end
 
 disp('Dictionary built.');

@@ -8,9 +8,10 @@ else %Sav paths
     
 end
 
+VOCopts.verbose = 0;
+
 VOCopts.wtype = 'dsift';
 VOCopts.dicttype = 'hikmeans';
-
 VOCopts.cltype = 'svc';
 
 
@@ -21,6 +22,8 @@ VOCopts.dsift.step = 10;
 %DICTIONARY
 VOCopts.hikmeans.K = 2;
 VOCopts.hikmeans.nleaves = 50;
+
+VOCopts.ikmeans.K = 10;
 
 %FEATURES
 
