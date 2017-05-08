@@ -25,7 +25,9 @@ catch
         I = imread(sprintf(VOCopts.imgpath,ids{j}));
         I = single(rgb2gray(I));
         
-        words = SSI_w_extractWords( VOCopts, I);
+        %Read annotations
+        annot = PASreadrecord(sprintf(VOCopts.annopath,ids{j}));
+        words = SSI_w_extractWords( VOCopts, I, annot);
         
         trainMetaData(j).filename = ids{j};
         trainMetaData(j).gt = gt(j);

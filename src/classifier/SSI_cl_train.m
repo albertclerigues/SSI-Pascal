@@ -10,6 +10,8 @@ switch VOCopts.cltype
     case 'nbayesc'
         [U,G] = meancov(Atrain);
         classifier = classc(nbayesc(U, G));
+    case 'rdf'
+        classifier = classc(randomforestc(Atrain));
     otherwise
         classifier = classc(knnc(Atrain, 1));
 end

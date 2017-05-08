@@ -7,7 +7,7 @@ if nargin == 3
     I = single(rgb2gray(A));
 
     % Compute words from image
-    words = SSI_w_extractWords(VOCopts, I);
+    words = SSI_w_extractWords(VOCopts, I, 0);
     
     % Bag words according to dictionary
     A = SSI_dic_bagWords(VOCopts, dictionary, words);

@@ -12,16 +12,17 @@ VOCopts.verbose = 0;
 
 VOCopts.wtype = 'dsift';
 VOCopts.dicttype = 'hikmeans';
-VOCopts.cltype = 'svc';
+VOCopts.cltype = 'rdf';
 
 
 % WORDS
-VOCopts.dsift.binSize = 8; %4 or 8
-VOCopts.dsift.step = 10;
+VOCopts.dsift.binSize = 4; %4 or 8
+VOCopts.dsift.step = 3;
+VOCopts.dsift.onlyBB = 1;
 
 %DICTIONARY
-VOCopts.hikmeans.K = 2;
-VOCopts.hikmeans.nleaves = 50;
+VOCopts.hikmeans.K = 3;
+VOCopts.hikmeans.nleaves = 60;
 
 VOCopts.ikmeans.K = 10;
 
