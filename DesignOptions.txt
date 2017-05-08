@@ -1,0 +1,5 @@
+
+(2) Compute dictionary either GLOBAL (all DSIFT of all classes) or LOCAL (all DSIFT of one class)
+
+(2) Compute HOW with full tree or only leaves
+
