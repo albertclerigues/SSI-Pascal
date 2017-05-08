@@ -9,9 +9,9 @@ tic;
 
 try
     % try to load features
-    load(sprintf(VOCopts.wordstestpath, cls),'testDescriptors');
+    load(sprintf(VOCopts.testdsiftpath, cls),'testFeatures');
 catch
-    testDescriptors = [];
+    testFeatures = [];
     
     for i = 1:length(ids)
         % display progress
@@ -22,10 +22,10 @@ catch
         
         % compute and save features
         I = imread(sprintf(VOCopts.imgpath,ids{i}));
-        testDescriptors = [testDescriptors; SSI_fd_computeDescriptors(VOCopts, dictionary, I)];
+        testFeatures = [testFeatures; SSI_fd_computeDesc(VOCopts, dictionary, I)];
     end
     
-    save(sprintf(VOCopts.wordstestpath, cls),'testDescriptors');
+    save(sprintf(VOCopts.testdsiftpath, cls),'testFeatures');
 end
 
 % create results file
@@ -33,7 +33,7 @@ fid=fopen(sprintf(VOCopts.clsrespath,'comp1',cls),'w');
 
 % Classify whole train set
 % compute confidence of positive classification
-c = classify(VOCopts, classifier, testDescriptors);
+c = classify(VOCopts, classifier, testFeatures);
         
 % write to results file
 for i = 1 : length(c)

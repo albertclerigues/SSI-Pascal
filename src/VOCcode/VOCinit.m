@@ -48,38 +48,21 @@ VOCopts.detrespath=[VOCopts.resdir '%s_det_' VOCopts.testset '_%s.txt'];
 VOCopts.classes={'bicycle','bus','car','cat','cow','dog',...
                  'horse','motorbike','person','sheep'};
 VOCopts.nclasses=length(VOCopts.classes);	
-
 VOCopts.minoverlap=0.5;
 
-% initialize example options
-VOCopts.exfdpath=[VOCopts.localdir '%s_fd.mat'];
+
+% WORDS caching filename
+VOCopts.wordstrainpath = [VOCopts.localdir VOCopts.wtype '_train_' ...
+    num2str(struct2array(VOCopts.dsift), '%i_') '%s.mat'];
+
+VOCopts.wordstestpath = [VOCopts.localdir VOCopts.wtype '_test_' ...
+    num2str(struct2array(VOCopts.dsift), '%i_') '%s.mat'];
 
 
-% Vocabulary DSIFT caching filename
-name_cache = 'dsift_train_';
-dsift_params = reshape(cell2mat(struct2cell(VOCopts.dsift)),1,[]);
-for i = 1:length(dsift_params)
-    name_cache = [name_cache int2str(dsift_params(i)) '_'];
-end
-VOCopts.dsiftpath = [VOCopts.localdir name_cache '%s.mat'];
-
-
-% HIKMEANS caching filename
-hikmeans_params = reshape(cell2mat(struct2cell(VOCopts.hikmeans)),1,[]);
-name_cache2 = 'hikmeans_';
-for i = 1:length(hikmeans_params)
-    name_cache2 = [name_cache2 int2str(hikmeans_params(i)) '_'];
-end
-name_cache2 = [name_cache2 name_cache];
-VOCopts.hikmeanspath = [VOCopts.localdir name_cache2 '%s.mat'];
-
-% Test HOBW DSIFT caching filename
-name_cache = 'dsift_test_';
-dsift_params = reshape(cell2mat(struct2cell(VOCopts.dsift)),1,[]);
-for i = 1:length(dsift_params)
-    name_cache = [name_cache int2str(dsift_params(i)) '_'];
-end
-VOCopts.testdsiftpath = [VOCopts.localdir name_cache '%s.mat'];
+% DICTIONARY caching filename
+VOCopts.dictpath = [VOCopts.localdir, VOCopts.dicttype, ...
+    num2str(struct2array(VOCopts.hikmeans), '%i_'), VOCopts.wtype, '_test_', ...
+    num2str(struct2array(VOCopts.dsift), '%i_'), '%s.mat'];
 
 
 

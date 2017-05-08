@@ -12,7 +12,7 @@ trainMetaData(length(ids)).filename = '';
 tic;
 try
     % try to load words
-    load(sprintf(VOCopts.dsiftpath, cls),'vocabulary', 'trainMetaData');
+    load(sprintf(VOCopts.wordstrainpath, cls),'vocabulary', 'trainMetaData');
 catch
     for j=1:length(ids)
         % display progress
@@ -34,7 +34,7 @@ catch
         vocabulary = [vocabulary, words];
     end
     
-    save(sprintf(VOCopts.dsiftpath, cls),'vocabulary', 'trainMetaData');
+    save(sprintf(VOCopts.wordstrainpath, cls),'vocabulary', 'trainMetaData');
 end
 
 disp('Full vocabulary built');
