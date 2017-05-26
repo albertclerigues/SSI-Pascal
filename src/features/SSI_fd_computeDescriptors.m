@@ -17,23 +17,26 @@ if nargin == 3
     if length(VOCopts.subWindows) == 2
         descriptors = [];
         
-        
-        
-        r_win = size(I, 1) * (0:(1/VOCopts.subWindows(1)):1);
-        c_win = size(I, 2) * (0:(1/VOCopts.subWindows(2)):1);
-        
-        for r = 1:length(r_win)-1
-            for c = 1:length(c_win)-1
-                x1 = r_win(r);   y1 = c_win(c);
-                x2 = r_win(r+1); y2 = c_win(c+1);
-                
-                win_frames = frames(1,:) > x1 & frames(1,:) < x2 & ...
-                             frames(2,:) > y1 & frames(2,:) < y2;
-                         
-                Ai = A(:, win_frames);
-                
-                descriptors = [descriptors; ...
-                               SSI_fd_computeFeatures(VOCopts, dictionary, Ai)];
+        for r_win_num = 1:VOCopts.subWindows(1)
+            for c_win_num = 1:VOCopts.subWindows(2)
+
+                r_win = size(I, 1) * (0:(1/r_win_num):1);
+                c_win = size(I, 2) * (0:(1/c_win_num):1);
+
+                for r = 1:length(r_win)-1
+                    for c = 1:length(c_win)-1
+                        x1 = r_win(r);   y1 = c_win(c);
+                        x2 = r_win(r+1); y2 = c_win(c+1);
+
+                        win_frames = frames(1,:) > x1 & frames(1,:) < x2 & ...
+                                     frames(2,:) > y1 & frames(2,:) < y2;
+
+                        Ai = A(:, win_frames);
+
+                        descriptors = [descriptors; ...
+                                       SSI_fd_computeFeatures(VOCopts, dictionary, Ai)];
+                    end
+                end
             end
         end
     else

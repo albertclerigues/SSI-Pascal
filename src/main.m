@@ -27,9 +27,10 @@ for i=1:VOCopts.nclasses
     %Read results and otuput
     figure(1); hold on;
     [fp,tp,auc]=VOCroc(VOCopts,'comp1',cls, true);   % compute and display ROC
-    
+    disp(['auc = ' num2str(auc)])
     if i<VOCopts.nclasses
-        fprintf('Press any key to continue with next class...\n'); pause;
+        fprintf('Press any key to continue with next class...\n'); 
+        %pause;
     end
 end
 
