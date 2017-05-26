@@ -1,4 +1,4 @@
-function [ words ] = SSI_w_PHOW( VOCopts, I, annot  )
+function [ words, frames ] = SSI_w_PHOW( VOCopts, I, annot  )
 I = single(I);
 
 opts = VOCopts.phow;
@@ -25,7 +25,7 @@ switch opts.color
 end
 
 
-[~, words] = vl_phow(I, 'sizes', opts.sizes,...
+[frames, words] = vl_phow(I, 'sizes', opts.sizes,...
                          'step', opts.step,...
                         'color', colora);
 end

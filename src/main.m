@@ -22,10 +22,10 @@ for i=1:VOCopts.nclasses
     
     % Test classifier and write results
     disp('Testing classifier');
-    SSI_cl_test(VOCopts,cls, classifier, dictionary);          % test classifier
+    SSI_cl_test(VOCopts, cls, classifier, dictionary);          % test classifier
     
     %Read results and otuput
-    figure(1);    hold on;
+    figure(1); hold on;
     [fp,tp,auc]=VOCroc(VOCopts,'comp1',cls, true);   % compute and display ROC
     
     if i<VOCopts.nclasses

@@ -8,29 +8,31 @@ else %Sav paths
     
 end
 
-VOCopts.wtype = 'phow';
+VOCopts.wtype = 'dsift';
 VOCopts.dicttype = 'hikmeans';
 VOCopts.cltype = 'svm';
 
 % WORDS
 VOCopts.dsift.binSize = 4; %4 or 8
-VOCopts.dsift.step = 8;
-VOCopts.dsift.onlyBB = 0;
+VOCopts.dsift.step = 3;
+VOCopts.dsift.onlyBB = 1;
 
-VOCopts.phow.sizes = 4; %default:  [4 6 8 10]
+VOCopts.phow.sizes = [4,8]; %default:  [4 6 8 10]
 VOCopts.phow.color = 2; %1: gray, 2: hsv, 3: rgb, 4: opponent
-VOCopts.phow.step = 4; %default 2
+VOCopts.phow.step = 30; %default 2
 VOCopts.phow.onlyBB = 0;
 
 %DICTIONARY
 VOCopts.hikmeans.K = 3;
-VOCopts.hikmeans.nleaves = 50;
+VOCopts.hikmeans.nleaves = 30;
 
 VOCopts.ikmeans.K = 10;
 
 %FEATURES
 
 %CLASSIFIER
+VOCopts.subWindows = [3 3];
+
 
 % change this path to point to your copy of the PASCAL VOC data
 VOCopts.datadir=[cwd '/'];
@@ -75,7 +77,7 @@ VOCopts.dictpath = [VOCopts.localdir, VOCopts.dicttype, '_' ...
 %TEST FEATURES caching
 VOCopts.wordstestpath = [ VOCopts.localdir, 'test_', VOCopts.dicttype, '_', ...
     num2str(struct2array(VOCopts.hikmeans), '%i_'), VOCopts.wtype, '_test_', ...
-    num2str(struct2array(wordopts), '%i_'), '%s.mat'];
+    num2str(struct2array(wordopts), '%i_'), 'win_', num2str(VOCopts.subWindows, '%i_') '%s.mat'];
 
 
 

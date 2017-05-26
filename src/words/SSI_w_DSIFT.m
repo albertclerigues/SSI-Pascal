@@ -1,4 +1,4 @@
-function [ words ] = SSI_w_DSIFT( VOCopts, I, annot )
+function [ words, frames ] = SSI_w_DSIFT( VOCopts, I, annot )
 
 if size(I,3) > 1
     I = rgb2gray(I);
@@ -14,7 +14,7 @@ else
     bounds = [0, 0, size(I,2), size(I,1)];
 end
 
-[~, words] = vl_dsift(I, 'size', opts.binSize,...
+[frames, words] = vl_dsift(I, 'size', opts.binSize,...
                          'step', opts.step,...
                          'FAST', ...
                          'bounds', bounds);
