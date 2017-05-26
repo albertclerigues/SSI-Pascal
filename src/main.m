@@ -25,9 +25,12 @@ for i=1:VOCopts.nclasses
     SSI_cl_test(VOCopts,cls, classifier, dictionary);          % test classifier
     
     %Read results and otuput
+    figure(1);    hold on;
     [fp,tp,auc]=VOCroc(VOCopts,'comp1',cls, true);   % compute and display ROC
     
     if i<VOCopts.nclasses
         fprintf('Press any key to continue with next class...\n'); pause;
     end
 end
+
+legend(VOCopts.classes);

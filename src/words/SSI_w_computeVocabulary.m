@@ -23,7 +23,6 @@ catch
         
         % compute and save words
         I = imread(sprintf(VOCopts.imgpath,ids{j}));
-        I = single(rgb2gray(I));
         
         %Read annotations
         annot = PASreadrecord(sprintf(VOCopts.annopath,ids{j}));

@@ -1,4 +1,10 @@
 function [ words ] = SSI_w_DSIFT( VOCopts, I, annot )
+
+if size(I,3) > 1
+    I = rgb2gray(I);
+end
+I = single(I);
+
 opts = VOCopts.dsift;
 
 if opts.onlyBB && isstruct(annot)

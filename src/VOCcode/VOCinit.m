@@ -8,21 +8,23 @@ else %Sav paths
     
 end
 
-VOCopts.verbose = 0;
-
-VOCopts.wtype = 'dsift';
+VOCopts.wtype = 'phow';
 VOCopts.dicttype = 'hikmeans';
-VOCopts.cltype = 'rdf';
-
+VOCopts.cltype = 'svm';
 
 % WORDS
 VOCopts.dsift.binSize = 4; %4 or 8
-VOCopts.dsift.step = 3;
-VOCopts.dsift.onlyBB = 1;
+VOCopts.dsift.step = 8;
+VOCopts.dsift.onlyBB = 0;
+
+VOCopts.phow.sizes = 4; %default:  [4 6 8 10]
+VOCopts.phow.color = 2; %1: gray, 2: hsv, 3: rgb, 4: opponent
+VOCopts.phow.step = 4; %default 2
+VOCopts.phow.onlyBB = 0;
 
 %DICTIONARY
 VOCopts.hikmeans.K = 3;
-VOCopts.hikmeans.nleaves = 60;
+VOCopts.hikmeans.nleaves = 50;
 
 VOCopts.ikmeans.K = 10;
 
@@ -56,17 +58,24 @@ VOCopts.minoverlap=0.5;
 
 
 % WORDS caching filename
+if strcmp(VOCopts.wtype, 'dsift')
+    wordopts = VOCopts.dsift;
+elseif strcmp(VOCopts.wtype, 'phow')
+    wordopts = VOCopts.phow;
+end
+
 VOCopts.wordstrainpath = [VOCopts.localdir VOCopts.wtype '_train_' ...
-    num2str(struct2array(VOCopts.dsift), '%i_') '%s.mat'];
-
-VOCopts.wordstestpath = [VOCopts.localdir VOCopts.wtype '_test_' ...
-    num2str(struct2array(VOCopts.dsift), '%i_') '%s.mat'];
-
+    num2str(struct2array(wordopts), '%i_') '%s.mat'];
 
 % DICTIONARY caching filename
-VOCopts.dictpath = [VOCopts.localdir, VOCopts.dicttype, ...
+VOCopts.dictpath = [VOCopts.localdir, VOCopts.dicttype, '_' ...
     num2str(struct2array(VOCopts.hikmeans), '%i_'), VOCopts.wtype, '_test_', ...
-    num2str(struct2array(VOCopts.dsift), '%i_'), '%s.mat'];
+    num2str(struct2array(wordopts), '%i_'), '%s.mat'];
+
+%TEST FEATURES caching
+VOCopts.wordstestpath = [ VOCopts.localdir, 'test_', VOCopts.dicttype, '_', ...
+    num2str(struct2array(VOCopts.hikmeans), '%i_'), VOCopts.wtype, '_test_', ...
+    num2str(struct2array(wordopts), '%i_'), '%s.mat'];
 
 
 

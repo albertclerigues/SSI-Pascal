@@ -4,7 +4,7 @@ descriptors = [];
 
 % Building HOBW for 1 image (Everything to do!)
 if nargin == 3
-    I = single(rgb2gray(A));
+    I = A;
 
     % Compute words from image
     words = SSI_w_extractWords(VOCopts, I, 0);
